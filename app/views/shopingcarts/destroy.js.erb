@@ -1,0 +1,9 @@
+$('.delete_food').on("ajax:success", function () {
+	$(this).parents('.block_delete_aj').remove();
+})
+$("#total_block").empty();
+$("#total_block").append("<%= escape_javascript(render 'total') %>");
+
+$("#total_block_2").empty();
+$("#total_block_2").append("<%= escape_javascript(render 'total') %>");
+  

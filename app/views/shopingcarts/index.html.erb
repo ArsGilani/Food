@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1> Содержимое корзины</h1>
+<br>
+
+<div class="view_cart col-md-12" id='comments-link'>
+  <h1>Ваш счет</h1>
+
+  <div id="basket_all">
+    <%= render 'basket' %>
+  </div>
+</div>
+
+<% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
+
+<br>
+     
+      
+ <%= link_to 'Очистить карзину', 
+              shopingcarts_destroy_all_path, 
+              method: :delete, remote:true, 
+              data: { confirm: 'Очистить карзину?' },  
+              class: "btn btn-danger btn_clear" %>
+
+<br>
+
+

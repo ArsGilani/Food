@@ -1,0 +1,48 @@
+<div class="row show_restaurant">
+	<div class="img_wrap show_r_img">
+		<%= image_tag "/uploads/cafe/#{@restaurant.image}", size: '100' %>
+	</div>
+	<div class="cafe-item-info new_class_show">
+		
+		<h1><%=@restaurant.name%> </h1>
+	
+		<pre><%= @restaurant.description %></pre>
+						
+	</div>
+</div>	
+<div class="row">	
+
+	<h3>Меню ресторана</h3>
+
+	<% @restaurant.categories.each do |item| %>
+		<div class="category_name col-md-12">
+			<p><%= item.name %></p> <br>
+			<% item.foods.each do |food| %>
+				<div class="col-md-3 dish-item">
+					<div class="img_card">
+						<%= image_tag "/uploads/foods/#{food.id}", size: '100' %>
+					</div>
+					<div class="descr_box">
+						<p><%= food.name %></p>
+						<p><%= food.description %></p>				
+					</div>
+					<span class="border"></span>
+					<p class="price_p"><%= food.price %>сом</p>	
+					<div class='form_box'>				
+						<%= form_for :shopingcart, url: users_add_cart_path, id: 'target', remote: true, method: :post do |f| %>
+							<%= f.text_field :counter, type: 'number', class: "enter_box", value: 1 %>
+							<%= f.hidden_field :food_id, value: food.id %>
+							<%= f.submit 'Заказать', class: "btn_input" %> 
+						<% end %> 
+					</div>
+				</div>
+			<% end %>
+
+	  	</div>
+  	<% end %>
+  		
+  
+</div>
+	
+
+	

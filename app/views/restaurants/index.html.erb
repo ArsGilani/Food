@@ -1,0 +1,34 @@
+
+
+<p id="notice"><%= notice %></p>
+
+<h1>Список Заведений</h1>
+<br>
+  <%= link_to 'Добавить новое заведение', new_restaurant_path, class: "btn btn-default add_btn" %>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Название</th>
+      <th>Лого</th>
+      <th>Описание</th>
+      <th colspan="3">Действия</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @restaurants.each do |restaurant| %>
+      <tr>
+        <td><%= link_to restaurant.name, restaurant_path(restaurant) %></td>
+        <td><%= image_tag "/uploads/cafe/#{restaurant.image}", size: '100' %></td>
+        <td> <pre><%= restaurant.description%></pre></td>
+        <td><%= link_to 'Show', restaurant, class: "btn btn-default" %>
+        <%= link_to 'Edit', edit_restaurant_path(restaurant), class: "btn btn-default" %>
+        <%= link_to 'Destroy', restaurant, class: "btn btn-default",remote: true, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
