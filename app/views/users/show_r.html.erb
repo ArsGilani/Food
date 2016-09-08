@@ -1,6 +1,6 @@
 <div class="row show_restaurant">
 	<div class="img_wrap show_r_img">
-		<%= image_tag "/uploads/cafe/#{@restaurant.image}", size: '100' %>
+		<%= image_tag @restaurant.image.url(:thumb) %>
 	</div>
 	<div class="cafe-item-info new_class_show">
 		
@@ -20,7 +20,7 @@
 			<% item.foods.each do |food| %>
 				<div class="col-md-3 dish-item">
 					<div class="img_card">
-						<%= image_tag "/uploads/foods/#{food.id}", size: '100' %>
+						<%= image_tag @food.image.url(:thumb) %>
 					</div>
 					<div class="descr_box">
 						<p><%= food.name %></p>

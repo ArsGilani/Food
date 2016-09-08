@@ -20,7 +20,7 @@
     <% @restaurants.each do |restaurant| %>
       <tr>
         <td><%= link_to restaurant.name, restaurant_path(restaurant) %></td>
-        <td><%= image_tag "/uploads/cafe/#{restaurant.image}", size: '100' %></td>
+        <td><%= image_tag @restaurant.image.url(:thumb) %></td>
         <td> <pre><%= restaurant.description%></pre></td>
         <td><%= link_to 'Show', restaurant, class: "btn btn-default" %>
         <%= link_to 'Edit', edit_restaurant_path(restaurant), class: "btn btn-default" %>

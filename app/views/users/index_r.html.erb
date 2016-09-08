@@ -4,7 +4,7 @@
 			<span class="lvl1"></span>
 			<span class="delivery">Доставка:&nbsp;160&nbsp;с</span>
 			<div class="img_wrap">
-				<%= image_tag "/uploads/cafe/#{restaurant.image}", size: '100' %>
+				<%= image_tag restaurant.image.url(:thumb) %>
 			</div>
 			<div class="cafe-item-info">
 				<h6 class="rest_name">

@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  ActiveAdmin.routes(self)
+  
+  devise_for :users
   resources :shopingcarts
   
   root 'users#index_r'
@@ -7,14 +10,7 @@ Rails.application.routes.draw do
 
   post 'users/add_cart'
 
-  scope :admin do
-    resources :foods
-    resources :restaurants
-    resources :categories
-    delete 'shopingcarts/destroy_all'
   
-  end
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

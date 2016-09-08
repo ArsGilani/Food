@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Cafe</title>
+  <title>Namba Food</title>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -22,9 +22,18 @@
 					обратный звонок
 				</a>
 			</div>
-			<div class="enter_box_block">
-				<a href="#">Вход</a>
-				<a href="#" class="registr">Регистрация</a>
+			<div class="enter_box_block">						
+		        <% if user_signed_in? %>		         
+		            Hello, <%= link_to current_user.name, edit_user_registration_path(current_user) %>
+		         
+		            <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
+		        
+		        <% else %>
+		        <%= link_to 'Вход', new_user_session_path %>
+		       	<%= link_to 'Регистрация', new_user_registration_path %>
+		        <% end %>
+		    
+			    
 			</div>
 			<div class="dropdown_closed" id="drop_down">
 				<div class="link_cart_p">
@@ -59,9 +68,7 @@
 						<li><%= link_to 'О нас', root_path %></li>
 						
 					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li><%= link_to '', restaurants_path, class: 'admin_ic', title: 'Вход для админов' %></li>
-					</ul>
+					
 				</div><!-- /.navbar-collapse -->
 			</div><!-- /.container-fluid -->
 		</nav>	
