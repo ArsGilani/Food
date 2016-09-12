@@ -1,19 +1,22 @@
-<% total=0 %>
-    <% Shopingcart.all.each do |cart| %>
-      <% total+=cart.food.price*cart.counter%>
-      <div class="block_delete_aj">
-        <p class="title_name">Ресторан: <%= cart.food.restaurant.name %></p>  
-        <p class="food_name" ><%= cart.food.name %></p>  
-          <div class="wrap_form">           
-            <%= form_for users_add_cart_path, remote: true do |f| %>
-              <%= f.text_field  :counter, type: 'number', :value => cart.counter, class: "enter_coun_shoping_cart"  %>                
-            <% end %> 
-          </div>          
-       
-        <p class="itog">Сумма:&nbsp;<%= cart.food.price*cart.counter %>сом</p>
-        <p class="delete_food_p"> 
-          <%= link_to '', cart,  class: "delete_food", remote:true, method: :delete %>
-        </p>
-      </div>     
+
+<% session[:cart].each do |key, val| %>
+  В кафе <%= Restaurant.find(key).name %> заказали: <br>
+
+  <% val.each do |k, v| %>
+    <p>
+    <% food = Food.find(k) %>
+    Блюдо: <%= food.name %>  <br>
+    по цене: <%=  food.price %> <br>
+    в количестве: <%= v %> <br>
+    <% total =  food.price * v %> 
+    На сумму: <%= total %> сомов
+    </p>
   <% end %>
-<p class="total_p_block" id='total_block_2'><%= render 'total' %></p>
+
+  <span></span>
+  <hr>
+<% end %>
+
+
+  
+

@@ -216,7 +216,7 @@ body{
 
 .img_wrap{
 	text-align:center;
-	padding: 20px 0 30px 0;
+	padding: 20px 0 10px 0;
 }
 .link_box a{
 	background: #118cc9;
@@ -290,10 +290,13 @@ body{
    background: #fff9eb;
 }
 .img_card{
-	width: 120px;
-	height: 120px;
+	width: 100px;
+	height: 100px;
+	margin: 0 10px 10px ;
 	float: left;
+	
 }
+
 .descr_box{
 	margin-bottom: 20px;
 }

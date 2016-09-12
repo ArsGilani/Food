@@ -15,25 +15,39 @@ class UsersController < ApplicationController
 
 	def show_f
 		@foods = Food.find(params[:id])
-
 	end
 
 	def add_cart
-		@shopingcart = Shopingcart.new(shopingcart_params)
-		if @shopingcart.save
-			respond_to do |format|
-		      format.html {}
-		      format.js {}
-		    end
-		else
-			flash[:notice] = "Ne dobavili"
-			redirect_to :back
+		
+		food_hash ={}
+		rest_id = params[:shopingcart][:rest_id]
+		food_id = params[:shopingcart][:food_id]
+		food_size = params[:shopingcart][:counter].to_i
+		food_hash[food_id] = food_size
+		
+		if session[:cart].nil?
+			session[:cart] = {}
 		end
 
-	    # respond_to do |format|
-	    #   format.html {}
-	    #   format.js {}
-	    # end
+		if session[:cart][rest_id].nil?			
+			session[:cart][rest_id] = {}
+			session[:cart][rest_id] = food_hash
+		else
+			unless session[:cart][rest_id][food_id].nil?
+				session[:cart][rest_id].each do |key, val|
+					if key == food_id
+						add_more = val.to_i + food_size.to_i
+						session[:cart][rest_id][key] = add_more
+					else
+						session[:cart][rest_id][key] = food_size
+					end
+				end
+			else
+				session[:cart][rest_id][food_id] = food_size
+			end
+		end
+
+		redirect_to :back
 	end
 
 private

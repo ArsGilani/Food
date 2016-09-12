@@ -20,7 +20,7 @@
 			<% item.foods.each do |food| %>
 				<div class="col-md-3 dish-item">
 					<div class="img_card">
-						<%= image_tag @food.image.url(:thumb) %>
+						<%= image_tag food.image.url(:thumb) %>
 					</div>
 					<div class="descr_box">
 						<p><%= food.name %></p>
@@ -29,9 +29,10 @@
 					<span class="border"></span>
 					<p class="price_p"><%= food.price %>сом</p>	
 					<div class='form_box'>				
-						<%= form_for :shopingcart, url: users_add_cart_path, id: 'target', remote: true, method: :post do |f| %>
+						<%= form_for :shopingcart, url: users_add_cart_path, id: 'target',  method: :post do |f| %>
 							<%= f.text_field :counter, type: 'number', class: "enter_box", value: 1 %>
 							<%= f.hidden_field :food_id, value: food.id %>
+							<%= f.hidden_field :rest_id, value: @restaurant.id %>
 							<%= f.submit 'Заказать', class: "btn_input" %> 
 						<% end %> 
 					</div>
@@ -44,5 +45,4 @@
   
 </div>
 	
-
 	

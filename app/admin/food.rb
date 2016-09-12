@@ -3,7 +3,7 @@ ActiveAdmin.register Food do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
-permit_params :name, :description, :category
+permit_params :name, :description, :category_id, :image, :price, :restaurant_id
 
 # or
 #
@@ -17,6 +17,7 @@ form do |f|
 			
 			f.input :name
 			f.input :description
+			f.input :restaurant
 			f.input :category
 			f.input :price
 			f.input :image, :as => :file, :hint => image_tag(f.object.image.url(:thumb))
@@ -44,6 +45,7 @@ form do |f|
 				image_tag food.image.url(:thumb)
 			end
 			row :name
+			row :category
 			row :description			
 			row :price
 		end

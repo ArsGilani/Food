@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   
   devise_for :users
+
+  get 'shopingcarts/clear'
   resources :shopingcarts
   
   root 'users#index_r'
