@@ -1,22 +1,33 @@
-
+<% sum_total = 0  %>
 <% session[:cart].each do |key, val| %>
-  В кафе <%= Restaurant.find(key).name %> заказали: <br>
+<% restaurant = Restaurant.find(key) %>
+  <strong>В кафе <%= restaurant.name %></strong> заказали: <br>
 
   <% val.each do |k, v| %>
     <p>
     <% food = Food.find(k) %>
-    Блюдо: <%= food.name %>  <br>
-    по цене: <%=  food.price %> <br>
-    в количестве: <%= v %> <br>
+    <b>Блюдо:</b> <%= food.name %>  <br>
+    <b>по цене:</b> <%= food.price %>
+               
+
+      <%= form_for :shopingcart, url: users_add_cart_path, id: 'target',  method: :post do |f| %>
+              <%= f.text_field  :counter, type: 'number', :value => v %>
+              <%= f.hidden_field :food_id, value: food.id %>
+              <%= f.hidden_field :rest_id, value: restaurant.id %>
+              <%= f.submit 'Заказать', class: "btn_input" %> 
+      <% end %> 
+          
+  <!--   <b>в количестве:</b> <%= v %> <br> -->
     <% total =  food.price * v %> 
-    На сумму: <%= total %> сомов
+    <b>На сумму:</b> <%= total %> сомов
+    <% sum_total += total %>
     </p>
   <% end %>
 
   <span></span>
   <hr>
 <% end %>
-
+<b>На общую сумму:</b><%= sum_total %> <br>
 
   
 

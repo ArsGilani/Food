@@ -6,7 +6,9 @@ class ShopingcartsController < ApplicationController
 
   end
 
+  def change_count
 
+  end
 
 
   def clear

@@ -1,0 +1,19 @@
+<% sum_total = 0  %>
+<% session[:cart].each do |key, val| %>
+ 
+  <% val.each do |k, v| %>
+  
+    <% food = Food.find(k) %>
+  
+   <%  food.price %> 
+   <% v %> 
+    <% total =  food.price * v %> 
+   
+    <% sum_total += total %>
+
+
+  <% end %>
+
+<% end %>
+
+<span>Ваш заказ на:&nbsp;</span><%=sum_total %><span>сом</span>
