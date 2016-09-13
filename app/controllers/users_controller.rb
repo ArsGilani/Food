@@ -19,15 +19,20 @@ class UsersController < ApplicationController
 
 	def add_cart
 		
+		
 		food_hash ={}
 		rest_id = params[:shopingcart][:rest_id]
 		food_id = params[:shopingcart][:food_id]
-		food_size = params[:shopingcart][:counter].to_i
+		food_size = params[:shopingcart][:counter]
+		food_size2 = params[:shopingcart][:food_size]
+
 		food_hash[food_id] = food_size
 		
 		if session[:cart].nil?
 			session[:cart] = {}
 		end
+
+		
 
 		if session[:cart][rest_id].nil?			
 			session[:cart][rest_id] = {}
@@ -35,7 +40,7 @@ class UsersController < ApplicationController
 		else
 			unless session[:cart][rest_id][food_id].nil?
 				session[:cart][rest_id].each do |key, val|
-					if key == food_id
+					if key == food_id		
 						add_more = val.to_i + food_size.to_i
 						session[:cart][rest_id][key] = add_more
 					else
@@ -47,6 +52,20 @@ class UsersController < ApplicationController
 			end
 		end
 
+		redirect_to :back
+	end
+
+	def add_size
+		rest_id = params[:shopingcart][:rest_id]
+		food_id = params[:shopingcart][:food_id]
+		food_size = params[:shopingcart][:food_size]
+		session[:cart][rest_id][food_id] = food_size
+
+		# session[:cart][:rest_id].each do |key, val|
+		# 	if val== 0
+		# 		val.delete(key)
+		# 	end
+		# end
 		redirect_to :back
 	end
 

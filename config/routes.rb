@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'users/restaurant/:id'=>'users#show_r', as: 'rest_show'
 
   post 'users/add_cart'
+  post 'users/add_size'
 
   
   # The priority is based upon order of creation: first created -> highest priority.

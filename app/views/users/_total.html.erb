@@ -1,7 +1,0 @@
-
-
-<% total=0 %>
-	<% Food.all.each do |cart| %>
-		<% total+=cart.food.price*cart.counter%>			
-		<% end %>
-	<span>Ваш заказ на:&nbsp;</span><%=total%><span>сом</span>

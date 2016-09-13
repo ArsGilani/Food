@@ -1,30 +1,28 @@
 <% sum_total = 0  %>
 <% session[:cart].each do |key, val| %>
-<% restaurant = Restaurant.find(key) %>
-  <strong>В кафе <%= restaurant.name %></strong> заказали: <br>
+  <% restaurant = Restaurant.find(key) %>
+    <strong>В кафе <%= restaurant.name %></strong> заказали: <br>
 
-  <% val.each do |k, v| %>
-    <p>
-    <% food = Food.find(k) %>
-    <b>Блюдо:</b> <%= food.name %>  <br>
-    <b>по цене:</b> <%= food.price %>
-               
+    <% val.each do |k, v| %>
+      <p>
+      <% food = Food.find(k) %>
+      <b>Блюдо:</b> <%= food.name %>  <br>
+      <b>по цене:</b> <%= food.price %>
+                 
 
-      <%= form_for :shopingcart, url: users_add_cart_path, id: 'target',  method: :post do |f| %>
-              <%= f.text_field  :counter, type: 'number', :value => v %>
-              <%= f.hidden_field :food_id, value: food.id %>
-              <%= f.hidden_field :rest_id, value: restaurant.id %>
-              <%= f.submit 'Заказать', class: "btn_input" %> 
+      <%= form_for :shopingcart, url: users_add_size_path, id: 'target', method: :post do |f| %>
+        <%= f.text_field  :food_size, type: 'number', :value => v %>
+        <%= f.hidden_field :food_id, value: food.id %>
+        <%= f.hidden_field :rest_id, value: restaurant.id %>
+        <%= f.submit 'Изменить', class: "btn_input" %> 
       <% end %> 
-          
-  <!--   <b>в количестве:</b> <%= v %> <br> -->
-    <% total =  food.price * v %> 
-    <b>На сумму:</b> <%= total %> сомов
-    <% sum_total += total %>
-    </p>
-  <% end %>
-
-  <span></span>
+            
+   
+      <% total =  food.price * v.to_i %> 
+      <b>На сумму:</b> <%= total %> сомов
+      <% sum_total += total %>
+      </p>
+    <% end %>  
   <hr>
 <% end %>
 <b>На общую сумму:</b><%= sum_total %> <br>
