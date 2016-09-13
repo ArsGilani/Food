@@ -67,15 +67,6 @@ ActiveRecord::Schema.define(version: 20160908152926) do
     t.datetime "image_updated_at"
   end
 
-  create_table "shopingcarts", force: :cascade do |t|
-    t.integer  "counter"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "food_id"
-  end
-
-  add_index "shopingcarts", ["food_id"], name: "index_shopingcarts_on_food_id"
-
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at",                          null: false
