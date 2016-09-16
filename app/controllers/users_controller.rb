@@ -18,7 +18,7 @@ class UsersController < ApplicationController
 	end
 
 	def add_cart
-		
+
 		
 		food_hash ={}
 		rest_id = params[:shopingcart][:rest_id]
@@ -61,11 +61,9 @@ class UsersController < ApplicationController
 		food_size = params[:shopingcart][:food_size]
 		session[:cart][rest_id][food_id] = food_size
 
-		# session[:cart][:rest_id].each do |key, val|
-		# 	if val== 0
-		# 		val.delete(key)
-		# 	end
-		# end
+		h = session[:cart][:rest_id]
+		h.delete_if {|key, val|val == 0}
+
 		redirect_to :back
 	end
 
